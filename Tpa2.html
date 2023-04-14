@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator BMI</title>
+    <style>
+        /* Styling untuk tampilan kalkulator */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #007BFF;
+        }
+        input, select, button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kalkulator BMI</h1>
+    <input type="number" id="weight" placeholder="Berat Badan (kg)">
+    <input type="number" id="height" placeholder="Tinggi Badan (cm)">
+    <select id="gender">
+        <option value="male">Laki-laki</option>
+        <option value="female">Perempuan</option>
+    </select>
+    <button onclick="calculateBMI()">Hitung</button>
+    <div id="result"></div>
+
+    <script>
+        function calculateBMI() {
+            // Mendapatkan input dari user
+            var weight = document.getElementById("weight").value;
+            var height = document.getElementById("height").value;
+            var gender = document.getElementById("gender").value;
+
+            // Menghitung BMI
+            var bmi = weight / ((height/100) * (height/100));
+
+            // Menampilkan hasil BMI
+            var resultElement = document.getElementById("result");
+            resultElement.innerHTML = "BMI: " + bmi.toFixed(2);
+
+            // Menampilkan kategori BMI berdasarkan gender
+            var category = "";
+            if (gender === "male") {
+                if (bmi < 20.7) {
+                    category = "Kurus";
+                } else if (bmi >= 20.7 && bmi < 26.4) {
+                    category = "Normal";
+                } else if (bmi >= 26.4 && bmi < 27.8) {
+                    category = "Gemuk";
+                } else {
+                    category = "Obesitas";
+                }
+            } else {
+                if (bmi < 19.1) {
+                    category = "Kurus";
+                } else if (bmi >= 19.1 && bmi < 25.8) {
+                    category = "Normal";
+                } else if (bmi >= 25.8 && bmi < 27.3) {
+                    category = "Gemuk";
+                } else {
+                    category = "Obesitas";
+                }
+            }
+
+            resultElement.innerHTML += " - Kategori: " + category;
+        }
+    </script>
+</body>
+</html>
